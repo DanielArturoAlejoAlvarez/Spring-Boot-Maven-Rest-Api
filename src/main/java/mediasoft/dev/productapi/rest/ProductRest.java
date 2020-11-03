@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class ProductRest {
 
+
+
     //@GetMapping
     /*public String hello() {
         return "<h1>Hello World!</h1>";
