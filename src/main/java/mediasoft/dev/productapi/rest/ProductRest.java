@@ -4,10 +4,7 @@ import mediasoft.dev.productapi.entities.Product;
 import mediasoft.dev.productapi.repositories.ProductDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,18 +17,35 @@ public class ProductRest {
     private ProductDAO pdao;
 
     @GetMapping
-    public ResponseEntity<List<Product>> listProduct() {
+    public ResponseEntity<List<Product>> getProducts() {
         List<Product> products = pdao.findAll();
         return ResponseEntity.ok(products);
     }
 
     @RequestMapping(value = "/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable(name = "id") Long id) {
-        Optional<Product> optProduct = pdao.findById(id);
-        if (optProduct.isPresent()) {
-            return ResponseEntity.ok(optProduct.get());
+        Optional<Product> opt = pdao.findById(id);
+        if (!opt.isPresent()) {
+            return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(opt.get());
+    }
+
+    @PostMapping
+    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+        Product newProd = pdao.save(product);
+        return ResponseEntity.ok(newProd);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> removeProduct(@PathVariable(name = "id") Long id) {
+        pdao.deleteById(id);
+        return ResponseEntity.ok(null);
+    }
+
+    @PutMapping
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+        return null;
     }
 
 
