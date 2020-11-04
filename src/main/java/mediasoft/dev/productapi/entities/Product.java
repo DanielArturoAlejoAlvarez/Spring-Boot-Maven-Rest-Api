@@ -22,7 +22,7 @@ public class Product {
     private Double stock;
     @Column(length = 512)
     private String image;
-    private Boolean status;
+    private String status;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -30,5 +30,10 @@ public class Product {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
     private Date createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = new Date();
+    }
 
 }

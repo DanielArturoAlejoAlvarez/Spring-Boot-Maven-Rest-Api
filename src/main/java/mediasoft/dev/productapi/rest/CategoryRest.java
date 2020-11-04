@@ -51,7 +51,6 @@ public class CategoryRest {
         }
         Category updCat = opt.get();
         updCat.setName(category.getName());
-        updCat.setStatus(category.getStatus());
         cdao.save(updCat);
         return ResponseEntity.ok(updCat);
     }
