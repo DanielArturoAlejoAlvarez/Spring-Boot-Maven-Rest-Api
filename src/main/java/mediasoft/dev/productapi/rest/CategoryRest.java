@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("categories")
-public class CategoryREST {
+public class CategoryRest {
 
     @Autowired
     private CategoryDAO cdao;
