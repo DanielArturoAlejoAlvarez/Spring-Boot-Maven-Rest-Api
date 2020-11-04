@@ -1,12 +1,11 @@
 package mediasoft.dev.productapi.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Getter @Setter
+@Data @AllArgsConstructor @NoArgsConstructor @Builder
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -18,11 +17,4 @@ public class Category {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
     private Date createdAt;
-
-    public Category(Long id, String name, Boolean status, Date createdAt) {
-        this.id = id;
-        this.name = name;
-        this.status = status;
-        this.createdAt = createdAt;
-    }
 }
