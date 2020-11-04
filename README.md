@@ -58,6 +58,16 @@ public class SwaggerConfig {
 }
 ```
 
+### Database 
+```java
+server.port=8081
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://127.0.0.1:3306/product_api?serverTimezone=UTC
+spring.jpa.hibernate.ddl-auto=update
+```
+
 ### Controllers
 ```java
 @RequestMapping(value = "/{id}")
