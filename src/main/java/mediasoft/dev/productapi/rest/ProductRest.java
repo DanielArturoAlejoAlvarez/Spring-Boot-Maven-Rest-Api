@@ -45,12 +45,21 @@ public class ProductRest {
 
     @PutMapping
     public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
-        return null;
+        Optional<Product> opt = pdao.findById(product.getId());
+        if (!opt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        Product updPro = opt.get();
+        updPro.setCode(product.getCode());
+        updPro.setName(product.getName());
+        updPro.setDescription(product.getDescription());
+        updPro.setPrice(product.getPrice());
+        updPro.setStock(product.getStock());
+        updPro.setImage(product.getImage());
+        updPro.setStatus(product.getStatus());
+        updPro.setCategory(product.getCategory());
+        pdao.save(updPro);
+        return ResponseEntity.ok(updPro);
     }
 
-
-    //@GetMapping
-    /*public String hello() {
-        return "<h1>Hello World!</h1>";
-    }*/
 }
